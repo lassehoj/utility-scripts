@@ -1,6 +1,6 @@
 #!/bin/bash
 
-for f in `grep -i "$1" *.txt | sed -e 's/txt:.*/pdf/' | uniq | xargs `
+for f in `grep -iH "$1" *.txt | sed -e 's/txt:.*/pdf/' | uniq | xargs `
 do
 	xdg-open "$f" &
 done
