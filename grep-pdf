@@ -1,6 +1,14 @@
 #!/bin/bash
 
-for f in `grep -i "$1" *.txt | sed -e 's/txt:.*/pdf/' | uniq | xargs `
+unamestr=`uname`
+if [[ "$unamestr" == 'Linux' ]]; then
+   OPEN=xdg-open
+elif [[ "$unamestr" == 'Darwin' ]]; then
+   OPEN=open 
+fi
+
+for f in `grep -iH "$1" *.txt | sed -e 's/txt:.*/pdf/' | uniq | xargs `
 do
-	xdg-open "$f" &
+	$OPEN "$f" &
 done
+
