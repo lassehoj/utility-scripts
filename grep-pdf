@@ -7,8 +7,13 @@ elif [[ "$unamestr" == 'Darwin' ]]; then
    OPEN=open 
 fi
 
-for f in `grep -iH "$1" *.txt | sed -e 's/txt:.*/pdf/' | uniq | xargs `
+for f in *.txt
 do
-	$OPEN "$f" &
+	RES=`grep -i "$1" "$f"` 
+	if [[ -n $RES ]] ; then
+		FILE="${f/txt/pdf}"
+		echo "$FILE"
+		$OPEN "$FILE" &
+	fi
 done
 
